@@ -38,7 +38,7 @@ from bpy.types import (Panel,
 # Properties of the main part of the panel
 # ----------------------------------------------------------
 
-class UISettings(PropertyGroup):
+class fBlahToolsUISettings(PropertyGroup):
     """Armature Selection Box"""
     src_armature = PointerProperty(
         type=bpy.types.Armature, 
@@ -192,7 +192,7 @@ class VIEW3D_PT_tools_fBlah(bpy.types.Panel):
     bl_label = "fBlah's Tools"
     bl_idname = "fblah.tools_panel"
     bl_space_type = 'VIEW_3D'
-    bl_region_type = 'TOOLS'
+    bl_region_type = 'UI'
     bl_context = 'objectmode'
     bl_category = "Tools"    
 
@@ -209,7 +209,7 @@ class VIEW3D_PT_tools_fBlah(bpy.types.Panel):
         icon_collapse = "DISCLOSURE_TRI_DOWN"
     
         if(not is_armature_selected()):
-            layout.label("Select required armature", icon = 'INFO')
+            layout.label(text="Select required armature", icon = 'INFO')
 
         layout.prop(fbt, "src_armature", text="Source Armature")
 
