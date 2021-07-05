@@ -27,7 +27,7 @@ bl_info = {
     "description": "Miscellaneous tools by fBlah for blender",
     "author": "Ajit D'Monte (fBlah), email: ajitdmonte@gmail.com",
     "version": (1, 0, 0),
-    "blender": (2, 79, 0),
+    "blender": (2, 93, 0),
     "location": "View3D > Tools > fBlah's Tools",    
     "warning": "This has not been tested rigorously.",
     "wiki_url": "",    
