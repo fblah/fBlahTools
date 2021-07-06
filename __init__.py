@@ -33,28 +33,22 @@ bl_info = {
     "wiki_url": "",    
     "category": 'Mesh'}
 
-# load and reload submodules
-# ----------------------------------------------------------
-
-import importlib
-from . import developer_utils
-importlib.reload(developer_utils)
-modules = developer_utils.setup_addon_modules(__path__, __name__, "bpy" in locals())
-
-import bpy
-from bpy.props import (PointerProperty)
-import traceback
-from .tools import UISettings
-
 # register
 # ----------------------------------------------------------
 
-def register():
-    try: bpy.utils.register_module(__name__)
-    except: traceback.print_exc()
+import bpy
+from bpy.props import (PointerProperty)
 
+from . tools import *
+
+def register():
+    bpy.utils.register_class(fBlahToolsUISettings)
+    bpy.utils.register_class(GetBoneAxisAngleRotationsOperator)
+    bpy.utils.register_class(GetInvertedBoneAxisAngleRotationsOperator)
+    bpy.utils.register_class(SetBoneAxisAngleRotationsOperator)
+    bpy.utils.register_class(VIEW3D_PT_tools_fBlah)  
     #Custom scene properties
-    bpy.types.Scene.fBlahToolsSettings = PointerProperty(type=UISettings)
+    bpy.types.Scene.fBlahToolsSettings = PointerProperty(type=fBlahToolsUISettings)
     
     #print("Registered {} with {} modules".format(bl_info["name"], len(modules)))
 
@@ -62,9 +56,11 @@ def register():
 # ----------------------------------------------------------
 
 def unregister():
-    try: bpy.utils.unregister_module(__name__)
-    except: traceback.print_exc()
-
+    bpy.utils.unregister_class(fBlahToolsUISettings)
+    bpy.utils.unregister_class(GetBoneAxisAngleRotationsOperator)
+    bpy.utils.unregister_class(GetInvertedBoneAxisAngleRotationsOperator)
+    bpy.utils.unregister_class(SetBoneAxisAngleRotationsOperator)
+    bpy.utils.unregister_class(VIEW3D_PT_tools_fBlah)  
     del bpy.types.Scene.fBlahToolsSettings
 
     #print("Unregistered {}".format(bl_info["name"]))

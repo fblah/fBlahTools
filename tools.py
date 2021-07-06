@@ -38,9 +38,9 @@ from bpy.types import (Panel,
 # Properties of the main part of the panel
 # ----------------------------------------------------------
 
-class UISettings(PropertyGroup):
+class fBlahToolsUISettings(PropertyGroup):
     """Armature Selection Box"""
-    src_armature = PointerProperty(
+    src_armature : PointerProperty(
         type=bpy.types.Armature, 
         name="Source Armature", 
         description="Select a source Armature", 
@@ -53,7 +53,6 @@ class UISettings(PropertyGroup):
 
 def is_armature_selected():
     """Checks if selected source armature is valid"""
-
     fbt = bpy.context.scene.fBlahToolsSettings
     if(fbt.src_armature):
         return True
@@ -175,7 +174,7 @@ class SetBoneAxisAngleRotationsOperator(bpy.types.Operator):
                     else:                        
                         self.report({'ERROR'},"Invalid rotations in clipboard")
                         break                
-                self.report({'INFO'}, "Copied to clipboard")
+                self.report({'INFO'}, "Copied From clipboard")
             else:
                 self.report({'ERROR'},"Invalid number of bones in clipboard")
         else:
@@ -192,7 +191,7 @@ class VIEW3D_PT_tools_fBlah(bpy.types.Panel):
     bl_label = "fBlah's Tools"
     bl_idname = "fblah.tools_panel"
     bl_space_type = 'VIEW_3D'
-    bl_region_type = 'TOOLS'
+    bl_region_type = 'UI'
     bl_context = 'objectmode'
     bl_category = "Tools"    
 
@@ -209,7 +208,7 @@ class VIEW3D_PT_tools_fBlah(bpy.types.Panel):
         icon_collapse = "DISCLOSURE_TRI_DOWN"
     
         if(not is_armature_selected()):
-            layout.label("Select required armature", icon = 'INFO')
+            layout.label(text="Select required armature", icon = 'INFO')
 
         layout.prop(fbt, "src_armature", text="Source Armature")
 
